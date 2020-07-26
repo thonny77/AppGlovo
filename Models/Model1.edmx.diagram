@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="697c46bdda064ee6979d0ddc0db9cef3" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="dbModel.categorias" Width="1.5" PointX="1.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.detalle_pedidos" Width="1.5" PointX="13" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.establecimientos" Width="2.375" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.eventos" Width="1.5" PointX="10.375" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.horario" Width="1.5" PointX="9" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Horario_establecimiento" Width="2" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.pagos" Width="1.5" PointX="7.875" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbModel.FK_Horario_establecimiento_establecimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.FK_Horario_establecimiento_horario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbModel.detalle_pago" Width="1.5" PointX="15.75" PointY="11.875" />
+        <AssociationConnector Association="dbModel.FK_detalle_pago_pagos" />
+        <EntityTypeShape EntityType="dbModel.tarifas" Width="1.5" PointX="7" PointY="15.375" />
+        <EntityTypeShape EntityType="dbModel.comisiones" Width="1.5" PointX="15.75" PointY="8" />
+        <EntityTypeShape EntityType="dbModel.pedidos" Width="1.5" PointX="11.875" PointY="5.625" />
+        <AssociationConnector Association="dbModel.FK_comisiones_pedidos" />
+        <AssociationConnector Association="dbModel.FK_detalle_pago_comisiones" />
+        <AssociationConnector Association="dbModel.FK_detalle_pedidos_pedidos" />
+        <AssociationConnector Association="dbModel.FK_pedidos_establecimientos" />
+        <AssociationConnector Association="dbModel.FK_eventos_pedidos" />
+        <EntityTypeShape EntityType="dbModel.empresas" Width="1.5" PointX="3.75" PointY="2" />
+        <AssociationConnector Association="dbModel.FK_empresas_categorias" />
+        <AssociationConnector Association="dbModel.FK_establecimientos_empresas" />
+        <EntityTypeShape EntityType="dbModel.productos" Width="1.5" PointX="3.75" PointY="18.625" />
+        <AssociationConnector Association="dbModel.FK_productos_categorias" />
+        <AssociationConnector Association="dbModel.FK_detalle_pedidos_productos" />
+        <EntityTypeShape EntityType="dbModel.usuarios" Width="1.5" PointX="3.125" PointY="7.125" />
+        <AssociationConnector Association="dbModel.FK_empresas_usuarios" />
+        <EntityTypeShape EntityType="dbModel.tarjetas" Width="1.5" PointX="6.625" PointY="18.625" />
+        <EntityTypeShape EntityType="dbModel.personas" Width="1.5" PointX="3.25" PointY="10.875" />
+        <AssociationConnector Association="dbModel.FK_pagos_personas" />
+        <AssociationConnector Association="dbModel.FK_pedidos_personas" />
+        <AssociationConnector Association="dbModel.FK_pedidos_personas1" />
+        <AssociationConnector Association="dbModel.fk_id_glover" />
+        <AssociationConnector Association="dbModel.FK_personas_usuarios" />
+        <AssociationConnector Association="dbModel.FK_tarjetas_personas" />
+        <EntityTypeShape EntityType="dbModel.Horario_glover" Width="1.5" PointX="11.25" PointY="15.5" />
+        <AssociationConnector Association="dbModel.FK_Horario_glover_horario" />
+        <AssociationConnector Association="dbModel.FK_Horario_glover_personas" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_categoria" Type="varchar" MaxLength="45" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" />
+          <Property Name="tipo" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="comisiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kilometraje" Type="decimal" Precision="5" Scale="3" />
+          <Property Name="tiempo_espera" Type="int" />
+          <Property Name="id_pedidos" Type="int" Nullable="false" />
+          <Property Name="extras" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="propina" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="descuento" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="detalle_pago">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tarifa_base" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="propina" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="extras" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="costo_recorrido" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="descuento" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cod_fact" Type="int" Nullable="false" />
+          <Property Name="id_comisiones" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detalle_pedidos">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="nombre_producto" Type="varchar" MaxLength="200" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="pedido_id_pedido" Type="int" Nullable="false" />
+          <Property Name="producto_sku" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="200" />
+          <Property Name="documento" Type="varchar" MaxLength="15" />
+          <Property Name="cbu" Type="varchar" MaxLength="21" />
+          <Property Name="pais" Type="varchar" MaxLength="45" />
+          <Property Name="categoria_id" Type="int" Nullable="false" />
+          <Property Name="usuario_id_us" Type="int" Nullable="false" />
+          <Property Name="correo_empresa" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="establecimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="direccion" Type="varchar" MaxLength="45" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="catalogo" Type="varchar" MaxLength="150" />
+          <Property Name="codigo_postal" Type="varchar" MaxLength="20" />
+          <Property Name="ciudad" Type="varchar" MaxLength="45" />
+          <Property Name="Establecimiento_id_establecimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" />
+          <Property Name="hora" Type="datetime" />
+          <Property Name="pedido_id_pedido" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="horario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="fin" Type="time" Precision="7" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Horario_establecimiento">
+          <Key>
+            <PropertyRef Name="idhe" />
+          </Key>
+          <Property Name="idhe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="int" Nullable="false" />
+          <Property Name="id_horario" Type="int" Nullable="false" />
+          <Property Name="id_esta" Type="int" />
+        </EntityType>
+        <EntityType Name="Horario_glover">
+          <Key>
+            <PropertyRef Name="idhg" />
+          </Key>
+          <Property Name="idhg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="int" Nullable="false" />
+          <Property Name="id_horario" Type="int" Nullable="false" />
+          <Property Name="id_glover" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="codigo_factura" />
+          </Key>
+          <Property Name="codigo_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="45" />
+          <Property Name="igv" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ruc" Type="char" MaxLength="11" />
+          <Property Name="monto_total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_pago" Type="datetime" />
+          <Property Name="descuento" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_inicio" Type="datetime" />
+          <Property Name="fecha_fin" Type="datetime" />
+          <Property Name="id_persona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pedidos">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_pedido" Type="datetime" />
+          <Property Name="puntuacion" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="fecha_entrega" Type="datetime" />
+          <Property Name="costo_envio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="personas_id_per" Type="int" Nullable="false" />
+          <Property Name="personas_id_per1" Type="int" Nullable="false" />
+          <Property Name="sedes_id_sedes" Type="int" Nullable="false" />
+          <Property Name="comprobante" Type="varchar" MaxLength="50" />
+          <Property Name="pagado" Type="int" />
+          <Property Name="destino" Type="varchar" MaxLength="150" />
+          <Property Name="origen" Type="varchar" MaxLength="50" />
+          <Property Name="firma" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="id_per" />
+          </Key>
+          <Property Name="id_per" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="200" />
+          <Property Name="correo" Type="varchar" MaxLength="100" />
+          <Property Name="direccion" Type="varchar" MaxLength="205" />
+          <Property Name="telefono" Type="varchar" MaxLength="9" />
+          <Property Name="documento" Type="varchar" MaxLength="15" />
+          <Property Name="tipo_vehiculo" Type="varchar" MaxLength="50" />
+          <Property Name="tipo_persona" Type="int" />
+          <Property Name="usuario_id_us" Type="int" Nullable="false" />
+          <Property Name="foto" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="sku" />
+          </Key>
+          <Property Name="sku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="105" />
+          <Property Name="descripcion" Type="varchar" MaxLength="205" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="foto" Type="varchar" MaxLength="150" />
+          <Property Name="categoria_id" Type="int" Nullable="false" />
+          <Property Name="stock" Type="int" />
+          <Property Name="precio_promo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="fv_promo" Type="datetime" />
+          <Property Name="codigo_producto" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tarifas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="precio_base" Type="decimal" Precision="10" Scale="1" Nullable="false" />
+          <Property Name="precio_km" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="precio_espera" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="id_glover" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tarjetas">
+          <Key>
+            <PropertyRef Name="id_tarjeta" />
+          </Key>
+          <Property Name="id_tarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personas_id_per" Type="int" Nullable="false" />
+          <Property Name="numero_cuenta" Type="nvarchar" MaxLength="22" />
+          <Property Name="numero_tarjeta" Type="nvarchar" MaxLength="22" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_us" />
+          </Key>
+          <Property Name="id_us" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="30" />
+          <Property Name="password" Type="varchar" MaxLength="200" />
+          <Property Name="estado" Type="int" />
+          <Property Name="token" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_comisiones_pedidos">
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="1" />
+          <End Role="comisiones" Type="Self.comisiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="comisiones">
+              <PropertyRef Name="id_pedidos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pago_comisiones">
+          <End Role="comisiones" Type="Self.comisiones" Multiplicity="1" />
+          <End Role="detalle_pago" Type="Self.detalle_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comisiones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_pago">
+              <PropertyRef Name="id_comisiones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pago_pagos">
+          <End Role="pagos" Type="Self.pagos" Multiplicity="1" />
+          <End Role="detalle_pago" Type="Self.detalle_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pagos">
+              <PropertyRef Name="codigo_factura" />
+            </Principal>
+            <Dependent Role="detalle_pago">
+              <PropertyRef Name="cod_fact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pedidos_pedidos">
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="1" />
+          <End Role="detalle_pedidos" Type="Self.detalle_pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="detalle_pedidos">
+              <PropertyRef Name="pedido_id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pedidos_productos">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="detalle_pedidos" Type="Self.detalle_pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="sku" />
+            </Principal>
+            <Dependent Role="detalle_pedidos">
+              <PropertyRef Name="producto_sku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empresas_categorias">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empresas_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="usuario_id_us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_establecimientos_empresas">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="establecimientos" Type="Self.establecimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="establecimientos">
+              <PropertyRef Name="Establecimiento_id_establecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eventos_pedidos">
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="pedido_id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_establecimiento_establecimientos">
+          <End Role="establecimientos" Type="Self.establecimientos" Multiplicity="0..1" />
+          <End Role="Horario_establecimiento" Type="Self.Horario_establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="establecimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_establecimiento">
+              <PropertyRef Name="id_esta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_establecimiento_horario">
+          <End Role="horario" Type="Self.horario" Multiplicity="1" />
+          <End Role="Horario_establecimiento" Type="Self.Horario_establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_establecimiento">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_glover_horario">
+          <End Role="horario" Type="Self.horario" Multiplicity="1" />
+          <End Role="Horario_glover" Type="Self.Horario_glover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_glover">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_glover_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="Horario_glover" Type="Self.Horario_glover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="Horario_glover">
+              <PropertyRef Name="id_glover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_glover">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="tarifas" Type="Self.tarifas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="tarifas">
+              <PropertyRef Name="id_glover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pagos_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_establecimientos">
+          <End Role="establecimientos" Type="Self.establecimientos" Multiplicity="1" />
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="establecimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="sedes_id_sedes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="personas_id_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_personas1">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="personas_id_per1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personas_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="usuario_id_us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_productos_categorias">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarjetas_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="tarjetas" Type="Self.tarjetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="tarjetas">
+              <PropertyRef Name="personas_id_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comisiones" EntityType="Self.comisiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_pago" EntityType="Self.detalle_pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_pedidos" EntityType="Self.detalle_pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="establecimientos" EntityType="Self.establecimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="eventos" EntityType="Self.eventos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horario" EntityType="Self.horario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario_establecimiento" EntityType="Self.Horario_establecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horario_glover" EntityType="Self.Horario_glover" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tarifas" EntityType="Self.tarifas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tarjetas" EntityType="Self.tarjetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_comisiones_pedidos" Association="Self.FK_comisiones_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="comisiones" EntitySet="comisiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pago_comisiones" Association="Self.FK_detalle_pago_comisiones">
+            <End Role="comisiones" EntitySet="comisiones" />
+            <End Role="detalle_pago" EntitySet="detalle_pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pago_pagos" Association="Self.FK_detalle_pago_pagos">
+            <End Role="pagos" EntitySet="pagos" />
+            <End Role="detalle_pago" EntitySet="detalle_pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pedidos_pedidos" Association="Self.FK_detalle_pedidos_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="detalle_pedidos" EntitySet="detalle_pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pedidos_productos" Association="Self.FK_detalle_pedidos_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="detalle_pedidos" EntitySet="detalle_pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresas_categorias" Association="Self.FK_empresas_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empresas_usuarios" Association="Self.FK_empresas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_establecimientos_empresas" Association="Self.FK_establecimientos_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="establecimientos" EntitySet="establecimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eventos_pedidos" Association="Self.FK_eventos_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_establecimiento_establecimientos" Association="Self.FK_Horario_establecimiento_establecimientos">
+            <End Role="establecimientos" EntitySet="establecimientos" />
+            <End Role="Horario_establecimiento" EntitySet="Horario_establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_establecimiento_horario" Association="Self.FK_Horario_establecimiento_horario">
+            <End Role="horario" EntitySet="horario" />
+            <End Role="Horario_establecimiento" EntitySet="Horario_establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_glover_horario" Association="Self.FK_Horario_glover_horario">
+            <End Role="horario" EntitySet="horario" />
+            <End Role="Horario_glover" EntitySet="Horario_glover" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_glover_personas" Association="Self.FK_Horario_glover_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="Horario_glover" EntitySet="Horario_glover" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_glover" Association="Self.fk_id_glover">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="tarifas" EntitySet="tarifas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pagos_personas" Association="Self.FK_pagos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_establecimientos" Association="Self.FK_pedidos_establecimientos">
+            <End Role="establecimientos" EntitySet="establecimientos" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_personas" Association="Self.FK_pedidos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_personas1" Association="Self.FK_pedidos_personas1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personas_usuarios" Association="Self.FK_personas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_productos_categorias" Association="Self.FK_productos_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarjetas_personas" Association="Self.FK_tarjetas_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="tarjetas" EntitySet="tarjetas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_categoria" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="dbModel.FK_empresas_categorias" FromRole="categorias" ToRole="empresas" />
+          <NavigationProperty Name="productos" Relationship="dbModel.FK_productos_categorias" FromRole="categorias" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="detalle_pedidos">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="nombre_producto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="pedido_id_pedido" Type="Int32" Nullable="false" />
+          <Property Name="producto_sku" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pedidos" Relationship="dbModel.FK_detalle_pedidos_pedidos" FromRole="detalle_pedidos" ToRole="pedidos" />
+          <NavigationProperty Name="productos" Relationship="dbModel.FK_detalle_pedidos_productos" FromRole="detalle_pedidos" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="establecimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="catalogo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_postal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ciudad" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Establecimiento_id_establecimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Horario_establecimiento" Relationship="Self.FK_Horario_establecimiento_establecimientos" FromRole="establecimientos" ToRole="Horario_establecimiento" />
+          <NavigationProperty Name="pedidos" Relationship="dbModel.FK_pedidos_establecimientos" FromRole="establecimientos" ToRole="pedidos" />
+          <NavigationProperty Name="empresas" Relationship="dbModel.FK_establecimientos_empresas" FromRole="establecimientos" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="eventos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hora" Type="DateTime" Precision="3" />
+          <Property Name="pedido_id_pedido" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pedidos" Relationship="dbModel.FK_eventos_pedidos" FromRole="eventos" ToRole="pedidos" />
+        </EntityType>
+        <EntityType Name="horario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="fin" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Horario_establecimiento" Relationship="Self.FK_Horario_establecimiento_horario" FromRole="horario" ToRole="Horario_establecimiento" />
+          <NavigationProperty Name="Horario_glover" Relationship="dbModel.FK_Horario_glover_horario" FromRole="horario" ToRole="Horario_glover" />
+        </EntityType>
+        <EntityType Name="Horario_establecimiento">
+          <Key>
+            <PropertyRef Name="idhe" />
+          </Key>
+          <Property Name="idhe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="Int32" Nullable="false" />
+          <Property Name="id_horario" Type="Int32" Nullable="false" />
+          <Property Name="id_esta" Type="Int32" />
+          <NavigationProperty Name="establecimientos" Relationship="Self.FK_Horario_establecimiento_establecimientos" FromRole="Horario_establecimiento" ToRole="establecimientos" />
+          <NavigationProperty Name="horario" Relationship="Self.FK_Horario_establecimiento_horario" FromRole="Horario_establecimiento" ToRole="horario" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="codigo_factura" />
+          </Key>
+          <Property Name="codigo_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moneda" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="igv" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ruc" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="monto_total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_pago" Type="DateTime" Precision="3" />
+          <Property Name="descuento" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="3" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="id_persona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="detalle_pago" Relationship="dbModel.FK_detalle_pago_pagos" FromRole="pagos" ToRole="detalle_pago" />
+          <NavigationProperty Name="personas" Relationship="dbModel.FK_pagos_personas" FromRole="pagos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Horario_establecimiento_establecimientos">
+          <End Role="establecimientos" Type="Self.establecimientos" Multiplicity="0..1" />
+          <End Role="Horario_establecimiento" Type="Self.Horario_establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="establecimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_establecimiento">
+              <PropertyRef Name="id_esta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_establecimiento_horario">
+          <End Role="horario" Type="Self.horario" Multiplicity="1" />
+          <End Role="Horario_establecimiento" Type="Self.Horario_establecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_establecimiento">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbglovoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorias" EntityType="Self.categorias" />
+          <EntitySet Name="detalle_pedidos" EntityType="Self.detalle_pedidos" />
+          <EntitySet Name="establecimientos" EntityType="Self.establecimientos" />
+          <EntitySet Name="eventos" EntityType="Self.eventos" />
+          <EntitySet Name="horario" EntityType="Self.horario" />
+          <EntitySet Name="Horario_establecimiento" EntityType="Self.Horario_establecimiento" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Horario_establecimiento_establecimientos" Association="Self.FK_Horario_establecimiento_establecimientos">
+            <End Role="establecimientos" EntitySet="establecimientos" />
+            <End Role="Horario_establecimiento" EntitySet="Horario_establecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_establecimiento_horario" Association="Self.FK_Horario_establecimiento_horario">
+            <End Role="horario" EntitySet="horario" />
+            <End Role="Horario_establecimiento" EntitySet="Horario_establecimiento" />
+          </AssociationSet>
+          <EntitySet Name="detalle_pago" EntityType="dbModel.detalle_pago" />
+          <AssociationSet Name="FK_detalle_pago_pagos" Association="dbModel.FK_detalle_pago_pagos">
+            <End Role="pagos" EntitySet="pagos" />
+            <End Role="detalle_pago" EntitySet="detalle_pago" />
+          </AssociationSet>
+          <EntitySet Name="tarifas" EntityType="dbModel.tarifas" />
+          <EntitySet Name="comisiones" EntityType="dbModel.comisiones" />
+          <EntitySet Name="pedidos" EntityType="dbModel.pedidos" />
+          <AssociationSet Name="FK_comisiones_pedidos" Association="dbModel.FK_comisiones_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="comisiones" EntitySet="comisiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pago_comisiones" Association="dbModel.FK_detalle_pago_comisiones">
+            <End Role="comisiones" EntitySet="comisiones" />
+            <End Role="detalle_pago" EntitySet="detalle_pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pedidos_pedidos" Association="dbModel.FK_detalle_pedidos_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="detalle_pedidos" EntitySet="detalle_pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_establecimientos" Association="dbModel.FK_pedidos_establecimientos">
+            <End Role="establecimientos" EntitySet="establecimientos" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_eventos_pedidos" Association="dbModel.FK_eventos_pedidos">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <EntitySet Name="empresas" EntityType="dbModel.empresas" />
+          <AssociationSet Name="FK_empresas_categorias" Association="dbModel.FK_empresas_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_establecimientos_empresas" Association="dbModel.FK_establecimientos_empresas">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="establecimientos" EntitySet="establecimientos" />
+          </AssociationSet>
+          <EntitySet Name="productos" EntityType="dbModel.productos" />
+          <AssociationSet Name="FK_productos_categorias" Association="dbModel.FK_productos_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalle_pedidos_productos" Association="dbModel.FK_detalle_pedidos_productos">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="detalle_pedidos" EntitySet="detalle_pedidos" />
+          </AssociationSet>
+          <EntitySet Name="usuarios" EntityType="dbModel.usuarios" />
+          <AssociationSet Name="FK_empresas_usuarios" Association="dbModel.FK_empresas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <EntitySet Name="tarjetas" EntityType="dbModel.tarjetas" />
+          <EntitySet Name="personas" EntityType="dbModel.personas" />
+          <AssociationSet Name="FK_pagos_personas" Association="dbModel.FK_pagos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_personas" Association="dbModel.FK_pedidos_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pedidos_personas1" Association="dbModel.FK_pedidos_personas1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_glover" Association="dbModel.fk_id_glover">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="tarifas" EntitySet="tarifas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personas_usuarios" Association="dbModel.FK_personas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarjetas_personas" Association="dbModel.FK_tarjetas_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="tarjetas" EntitySet="tarjetas" />
+          </AssociationSet>
+          <EntitySet Name="Horario_glover" EntityType="dbModel.Horario_glover" />
+          <AssociationSet Name="FK_Horario_glover_horario" Association="dbModel.FK_Horario_glover_horario">
+            <End Role="horario" EntitySet="horario" />
+            <End Role="Horario_glover" EntitySet="Horario_glover" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Horario_glover_personas" Association="dbModel.FK_Horario_glover_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="Horario_glover" EntitySet="Horario_glover" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="detalle_pago">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tarifa_base" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="propina" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="extras" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="costo_recorrido" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="descuento" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cod_fact" Type="Int32" Nullable="false" />
+          <Property Name="id_comisiones" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pagos" Relationship="dbModel.FK_detalle_pago_pagos" FromRole="detalle_pago" ToRole="pagos" />
+          <NavigationProperty Name="comisiones" Relationship="dbModel.FK_detalle_pago_comisiones" FromRole="detalle_pago" ToRole="comisiones" />
+        </EntityType>
+        <Association Name="FK_detalle_pago_pagos">
+          <End Type="dbModel.pagos" Role="pagos" Multiplicity="1" />
+          <End Type="dbModel.detalle_pago" Role="detalle_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pagos">
+              <PropertyRef Name="codigo_factura" />
+            </Principal>
+            <Dependent Role="detalle_pago">
+              <PropertyRef Name="cod_fact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tarifas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="precio_base" Type="Decimal" Nullable="false" Precision="10" Scale="1" />
+          <Property Name="precio_km" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="precio_espera" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="id_glover" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="dbModel.fk_id_glover" FromRole="tarifas" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="comisiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kilometraje" Type="Decimal" Precision="5" Scale="3" />
+          <Property Name="tiempo_espera" Type="Int32" />
+          <Property Name="id_pedidos" Type="Int32" Nullable="false" />
+          <Property Name="extras" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="propina" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="descuento" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="pedidos" Relationship="dbModel.FK_comisiones_pedidos" FromRole="comisiones" ToRole="pedidos" />
+          <NavigationProperty Name="detalle_pago" Relationship="dbModel.FK_detalle_pago_comisiones" FromRole="comisiones" ToRole="detalle_pago" />
+        </EntityType>
+        <EntityType Name="pedidos">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_pedido" Type="DateTime" Precision="3" />
+          <Property Name="puntuacion" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
+          <Property Name="costo_envio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="personas_id_per" Type="Int32" Nullable="false" />
+          <Property Name="personas_id_per1" Type="Int32" Nullable="false" />
+          <Property Name="sedes_id_sedes" Type="Int32" Nullable="false" />
+          <Property Name="comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pagado" Type="Int32" />
+          <Property Name="destino" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="comisiones" Relationship="dbModel.FK_comisiones_pedidos" FromRole="pedidos" ToRole="comisiones" />
+          <NavigationProperty Name="detalle_pedidos" Relationship="dbModel.FK_detalle_pedidos_pedidos" FromRole="pedidos" ToRole="detalle_pedidos" />
+          <NavigationProperty Name="establecimientos" Relationship="dbModel.FK_pedidos_establecimientos" FromRole="pedidos" ToRole="establecimientos" />
+          <NavigationProperty Name="eventos" Relationship="dbModel.FK_eventos_pedidos" FromRole="pedidos" ToRole="eventos" />
+          <NavigationProperty Name="personas" Relationship="dbModel.FK_pedidos_personas" FromRole="pedidos" ToRole="personas" />
+          <NavigationProperty Name="personas1" Relationship="dbModel.FK_pedidos_personas1" FromRole="pedidos" ToRole="personas" />
+        </EntityType>
+        <Association Name="FK_comisiones_pedidos">
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="1" />
+          <End Type="dbModel.comisiones" Role="comisiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="comisiones">
+              <PropertyRef Name="id_pedidos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pago_comisiones">
+          <End Type="dbModel.comisiones" Role="comisiones" Multiplicity="1" />
+          <End Type="dbModel.detalle_pago" Role="detalle_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comisiones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle_pago">
+              <PropertyRef Name="id_comisiones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pedidos_pedidos">
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="1" />
+          <End Type="dbModel.detalle_pedidos" Role="detalle_pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="detalle_pedidos">
+              <PropertyRef Name="pedido_id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_establecimientos">
+          <End Type="dbModel.establecimientos" Role="establecimientos" Multiplicity="1" />
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="establecimientos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="sedes_id_sedes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_eventos_pedidos">
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="1" />
+          <End Type="dbModel.eventos" Role="eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="pedido_id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cbu" Type="String" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Name="pais" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="categoria_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_id_us" Type="Int32" Nullable="false" />
+          <Property Name="correo_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="categorias" Relationship="dbModel.FK_empresas_categorias" FromRole="empresas" ToRole="categorias" />
+          <NavigationProperty Name="establecimientos" Relationship="dbModel.FK_establecimientos_empresas" FromRole="empresas" ToRole="establecimientos" />
+          <NavigationProperty Name="usuarios" Relationship="dbModel.FK_empresas_usuarios" FromRole="empresas" ToRole="usuarios" />
+        </EntityType>
+        <Association Name="FK_empresas_categorias">
+          <End Type="dbModel.categorias" Role="categorias" Multiplicity="1" />
+          <End Type="dbModel.empresas" Role="empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_establecimientos_empresas">
+          <End Type="dbModel.empresas" Role="empresas" Multiplicity="1" />
+          <End Type="dbModel.establecimientos" Role="establecimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="establecimientos">
+              <PropertyRef Name="Establecimiento_id_establecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="sku" />
+          </Key>
+          <Property Name="sku" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="105" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="205" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="foto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="categoria_id" Type="Int32" Nullable="false" />
+          <Property Name="stock" Type="Int32" />
+          <Property Name="precio_promo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="fv_promo" Type="DateTime" Precision="3" />
+          <Property Name="codigo_producto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="categorias" Relationship="dbModel.FK_productos_categorias" FromRole="productos" ToRole="categorias" />
+          <NavigationProperty Name="detalle_pedidos" Relationship="dbModel.FK_detalle_pedidos_productos" FromRole="productos" ToRole="detalle_pedidos" />
+        </EntityType>
+        <Association Name="FK_productos_categorias">
+          <End Type="dbModel.categorias" Role="categorias" Multiplicity="1" />
+          <End Type="dbModel.productos" Role="productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalle_pedidos_productos">
+          <End Type="dbModel.productos" Role="productos" Multiplicity="1" />
+          <End Type="dbModel.detalle_pedidos" Role="detalle_pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="sku" />
+            </Principal>
+            <Dependent Role="detalle_pedidos">
+              <PropertyRef Name="producto_sku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_us" />
+          </Key>
+          <Property Name="id_us" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="token" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="dbModel.FK_empresas_usuarios" FromRole="usuarios" ToRole="empresas" />
+          <NavigationProperty Name="personas" Relationship="dbModel.FK_personas_usuarios" FromRole="usuarios" ToRole="personas" />
+        </EntityType>
+        <Association Name="FK_empresas_usuarios">
+          <End Type="dbModel.usuarios" Role="usuarios" Multiplicity="1" />
+          <End Type="dbModel.empresas" Role="empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="usuario_id_us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tarjetas">
+          <Key>
+            <PropertyRef Name="id_tarjeta" />
+          </Key>
+          <Property Name="id_tarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personas_id_per" Type="Int32" Nullable="false" />
+          <Property Name="numero_cuenta" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="numero_tarjeta" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="personas" Relationship="dbModel.FK_tarjetas_personas" FromRole="tarjetas" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="id_per" />
+          </Key>
+          <Property Name="id_per" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="205" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="documento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_vehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_persona" Type="Int32" />
+          <Property Name="usuario_id_us" Type="Int32" Nullable="false" />
+          <Property Name="foto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="pagos" Relationship="dbModel.FK_pagos_personas" FromRole="personas" ToRole="pagos" />
+          <NavigationProperty Name="pedidos" Relationship="dbModel.FK_pedidos_personas" FromRole="personas" ToRole="pedidos" />
+          <NavigationProperty Name="pedidos1" Relationship="dbModel.FK_pedidos_personas1" FromRole="personas" ToRole="pedidos" />
+          <NavigationProperty Name="tarifas" Relationship="dbModel.fk_id_glover" FromRole="personas" ToRole="tarifas" />
+          <NavigationProperty Name="usuarios" Relationship="dbModel.FK_personas_usuarios" FromRole="personas" ToRole="usuarios" />
+          <NavigationProperty Name="tarjetas" Relationship="dbModel.FK_tarjetas_personas" FromRole="personas" ToRole="tarjetas" />
+          <NavigationProperty Name="Horario_glover" Relationship="dbModel.FK_Horario_glover_personas" FromRole="personas" ToRole="Horario_glover" />
+        </EntityType>
+        <Association Name="FK_pagos_personas">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.pagos" Role="pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_personas">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="personas_id_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pedidos_personas1">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.pedidos" Role="pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="pedidos">
+              <PropertyRef Name="personas_id_per1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_glover">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.tarifas" Role="tarifas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="tarifas">
+              <PropertyRef Name="id_glover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personas_usuarios">
+          <End Type="dbModel.usuarios" Role="usuarios" Multiplicity="1" />
+          <End Type="dbModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="usuario_id_us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarjetas_personas">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.tarjetas" Role="tarjetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="tarjetas">
+              <PropertyRef Name="personas_id_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Horario_glover">
+          <Key>
+            <PropertyRef Name="idhg" />
+          </Key>
+          <Property Name="idhg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="Int32" Nullable="false" />
+          <Property Name="id_horario" Type="Int32" Nullable="false" />
+          <Property Name="id_glover" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="horario" Relationship="dbModel.FK_Horario_glover_horario" FromRole="Horario_glover" ToRole="horario" />
+          <NavigationProperty Name="personas" Relationship="dbModel.FK_Horario_glover_personas" FromRole="Horario_glover" ToRole="personas" />
+        </EntityType>
+        <Association Name="FK_Horario_glover_horario">
+          <End Type="dbModel.horario" Role="horario" Multiplicity="1" />
+          <End Type="dbModel.Horario_glover" Role="Horario_glover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Horario_glover">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Horario_glover_personas">
+          <End Type="dbModel.personas" Role="personas" Multiplicity="1" />
+          <End Type="dbModel.Horario_glover" Role="Horario_glover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id_per" />
+            </Principal>
+            <Dependent Role="Horario_glover">
+              <PropertyRef Name="id_glover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbglovoEntities1">
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="dbModel.categorias">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_pedidos">
+            <EntityTypeMapping TypeName="dbModel.detalle_pedidos">
+              <MappingFragment StoreEntitySet="detalle_pedidos">
+                <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="nombre_producto" ColumnName="nombre_producto" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="pedido_id_pedido" ColumnName="pedido_id_pedido" />
+                <ScalarProperty Name="producto_sku" ColumnName="producto_sku" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="establecimientos">
+            <EntityTypeMapping TypeName="dbModel.establecimientos">
+              <MappingFragment StoreEntitySet="establecimientos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="catalogo" ColumnName="catalogo" />
+                <ScalarProperty Name="codigo_postal" ColumnName="codigo_postal" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="Establecimiento_id_establecimiento" ColumnName="Establecimiento_id_establecimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventos">
+            <EntityTypeMapping TypeName="dbModel.eventos">
+              <MappingFragment StoreEntitySet="eventos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="pedido_id_pedido" ColumnName="pedido_id_pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horario">
+            <EntityTypeMapping TypeName="dbModel.horario">
+              <MappingFragment StoreEntitySet="horario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="inicio" ColumnName="inicio" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horario_establecimiento">
+            <EntityTypeMapping TypeName="dbModel.Horario_establecimiento">
+              <MappingFragment StoreEntitySet="Horario_establecimiento">
+                <ScalarProperty Name="idhe" ColumnName="idhe" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+                <ScalarProperty Name="id_esta" ColumnName="id_esta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pagos">
+            <EntityTypeMapping TypeName="dbModel.pagos">
+              <MappingFragment StoreEntitySet="pagos">
+                <ScalarProperty Name="codigo_factura" ColumnName="codigo_factura" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="igv" ColumnName="igv" />
+                <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="id_persona" ColumnName="id_persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalle_pago">
+            <EntityTypeMapping TypeName="dbModel.detalle_pago">
+              <MappingFragment StoreEntitySet="detalle_pago">
+                <ScalarProperty Name="id_comisiones" ColumnName="id_comisiones" />
+                <ScalarProperty Name="cod_fact" ColumnName="cod_fact" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="costo_recorrido" ColumnName="costo_recorrido" />
+                <ScalarProperty Name="extras" ColumnName="extras" />
+                <ScalarProperty Name="propina" ColumnName="propina" />
+                <ScalarProperty Name="tarifa_base" ColumnName="tarifa_base" />
+                <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tarifas">
+            <EntityTypeMapping TypeName="dbModel.tarifas">
+              <MappingFragment StoreEntitySet="tarifas">
+                <ScalarProperty Name="id_glover" ColumnName="id_glover" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio_espera" ColumnName="precio_espera" />
+                <ScalarProperty Name="precio_km" ColumnName="precio_km" />
+                <ScalarProperty Name="precio_base" ColumnName="precio_base" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comisiones">
+            <EntityTypeMapping TypeName="dbModel.comisiones">
+              <MappingFragment StoreEntitySet="comisiones">
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="propina" ColumnName="propina" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="extras" ColumnName="extras" />
+                <ScalarProperty Name="id_pedidos" ColumnName="id_pedidos" />
+                <ScalarProperty Name="tiempo_espera" ColumnName="tiempo_espera" />
+                <ScalarProperty Name="kilometraje" ColumnName="kilometraje" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedidos">
+            <EntityTypeMapping TypeName="dbModel.pedidos">
+              <MappingFragment StoreEntitySet="pedidos">
+                <ScalarProperty Name="firma" ColumnName="firma" />
+                <ScalarProperty Name="origen" ColumnName="origen" />
+                <ScalarProperty Name="destino" ColumnName="destino" />
+                <ScalarProperty Name="pagado" ColumnName="pagado" />
+                <ScalarProperty Name="comprobante" ColumnName="comprobante" />
+                <ScalarProperty Name="sedes_id_sedes" ColumnName="sedes_id_sedes" />
+                <ScalarProperty Name="personas_id_per1" ColumnName="personas_id_per1" />
+                <ScalarProperty Name="personas_id_per" ColumnName="personas_id_per" />
+                <ScalarProperty Name="costo_envio" ColumnName="costo_envio" />
+                <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="puntuacion" ColumnName="puntuacion" />
+                <ScalarProperty Name="fecha_pedido" ColumnName="fecha_pedido" />
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="dbModel.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="correo_empresa" ColumnName="correo_empresa" />
+                <ScalarProperty Name="usuario_id_us" ColumnName="usuario_id_us" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="cbu" ColumnName="cbu" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="dbModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="codigo_producto" ColumnName="codigo_producto" />
+                <ScalarProperty Name="fv_promo" ColumnName="fv_promo" />
+                <ScalarProperty Name="precio_promo" ColumnName="precio_promo" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="dbModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id_us" ColumnName="id_us" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tarjetas">
+            <EntityTypeMapping TypeName="dbModel.tarjetas">
+              <MappingFragment StoreEntitySet="tarjetas">
+                <ScalarProperty Name="numero_tarjeta" ColumnName="numero_tarjeta" />
+                <ScalarProperty Name="numero_cuenta" ColumnName="numero_cuenta" />
+                <ScalarProperty Name="personas_id_per" ColumnName="personas_id_per" />
+                <ScalarProperty Name="id_tarjeta" ColumnName="id_tarjeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personas">
+            <EntityTypeMapping TypeName="dbModel.personas">
+              <MappingFragment StoreEntitySet="personas">
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="usuario_id_us" ColumnName="usuario_id_us" />
+                <ScalarProperty Name="tipo_persona" ColumnName="tipo_persona" />
+                <ScalarProperty Name="tipo_vehiculo" ColumnName="tipo_vehiculo" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="id_per" ColumnName="id_per" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horario_glover">
+            <EntityTypeMapping TypeName="dbModel.Horario_glover">
+              <MappingFragment StoreEntitySet="Horario_glover">
+                <ScalarProperty Name="id_glover" ColumnName="id_glover" />
+                <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="idhg" ColumnName="idhg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
